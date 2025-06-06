@@ -1,3 +1,5 @@
+
+
 // Test per vedere se ho capito la logica
 //if (app) {
 //const testoParagrafo = "Questo è un paragrafo!"; // variabile, poi metti la variabile così scrive questo testo
@@ -9,7 +11,7 @@
 //}
 // Ok, funziona!
 
-// In teoria dovrebbe refreshare la pagina e tornare su con ogni refresh... ma in pratica...
+// In teoria dovrebbe refreshare la pagina e tornare su con ogni refresh... ma in pratica non funziona...
 window.addEventListener('load', () => {
     if (window.location.hash === '#') {
       history.replaceState(null, null, ' ');
@@ -17,15 +19,15 @@ window.addEventListener('load', () => {
     }
   });  
 
+// Crea l'HTML tramite JS
 const app = document.getElementById("app");
 
 if (app) {
-
     app.innerHTML = `
     <header>
     <nav class="navbar">
     <div class="nav-sinistra">
-      <img src="https://via.placeholder.com/40" alt="Logo" class="logo-img" />
+      <img src="/logo.png" alt="" class="logo-img" draggable="false" />
       <a href="#" class="logo-text">Sara La Maga</a>
     </div>
 
@@ -37,45 +39,56 @@ if (app) {
       </div>
 
       <div class="nav-social">
-        <a href="#"><img src="instagram-icon.svg" alt="Instagram" /></a>
-        <a href="#"><img src="linkedin-icon.svg" alt="LinkedIn" /></a>
+        <a href="https://www.facebook.com/?locale=it_IT"><img src="/grimorio.png" alt="Facciagrimorio" /></a>
+        <a href="https://it.linkedin.com/"><img src="/calderone.png" alt="CalderIn" /></a>
       </div>
       </nav>
     </header>
 
     <body>
-    <div class="fotoprofilo">
     <div class="cerchio">
-    <img src="" alt="" draggable: "none">
-    </div>
+    <img class="fotoprofilo" src="/saramage.png" alt="Sara Pietrarosa" draggable: "false">
     </div>
 
     <section class="home">
       <h2 id="scrollspyHeading1">Home</h2>
-      <p>Descrizione pagina</p>
+      <p>Benvenuti nella pagina di Sara La Maga.<br>
+      In questa pagina troverete la mia storia e il mio percorso formativo,<br> i servizi che offro e come contattarmi via piccione viaggiatore.</p>
     </section>
 
     <section class="aboutme">
       <h2 id="scrollspyHeading2">Chi sono</h2>
-      <p>Backstory: Sara è una Maga del Regno di Engimorium. Ha studiato presso l'Accademia di Magia magia elementale. 
-      Lavora come maga mercenaria, offrendo i suoi servizi e le sue abilità agli avventurieri che hanno bisogno di un mago.</p>
+      <p>Sono Sara Rosapietra, Maga del Regno di Engimiath, originaria del villaggio di Orbas. Ho studiato magia elementale presso l'Accademia di Magia Reale Engimorium, ottenendo il massimo dei voti.
+      Le mia specialità sono le magie elementali, i portali e le pozioni. Ho scritto un libro di magia intitolato: "Engimorio", dove spiego a giovani maghi come approcciarsi alla via della magia. 
+      Lavoro principalmente come maga mercenaria offrendo i miei servizi e le mie abilità agli avventurieri che hanno bisogno di un mago durante le loro spedizioni nei dungeon.
+      Ma insegno anche all'Accademia di Engimorium, quando sono in città, tra una spedizione e l'altra. Inoltre sono in grado di prevedere il futuro di chiunque osservando i fondi di caffè.
+      <br>Sono una maga dall'enorme talento, con una particolare affinità per le magie di fuoco. Posso portarvi da un capo all'altro del mondo con i miei portali, e far innamorare chiunque di voi con i miei famosissimi filtri d'amore.
+      <br>Con me il successo è garantito.
+      </p>
     </section>
 
     <section class="servizi">
       <h2 id="scrollspyHeading3">Servizi</h2>
-      <p>Esempio: tipi di magie conosciute, portali, pozioni, lettura del futuro dalle tazzine di caffè</p>
+      <p>I servizi che offro spaziano da maga mercenaria a insegnante di magia.<br>Portali per ogni luogo conosciuto.<br>Creazione di pozioni, filtri ed elisir. Letture del futuro tramite fondi di caffè.
+      <br>Ogni servizio ha un costo che può variare da: sacchi d'oro, gemme preziose, ingredienti rari o tesori.</p>
+      <ul class="listaservizi">
+      <li>Guida per Dungeon</li>
+      <li>Insegnante di Magia Elementale</li>
+      <li>Portali</li>
+      <li>Pozioni, filtri ed elisir</li>
+      <li>Divinazione</li>
     </section>
 
    <section class="contatti">
   <h2 id="scrollspyHeading4">Contatti</h2>
   <form>
     <div class="form-sinistra">
-      <input type="text" placeholder="Nome">
-      <input type="email" placeholder="Email">
+      <input type="text" placeholder="Nome e Cognome o Titolo (Luna la Druida)">
+      <input type="email" placeholder="Nome Piccione (teodorindo@piccione.nomeregno)">
     </div>
     <div class="form-destra">
       <textarea placeholder="Messaggio"></textarea>
-      <button type="submit">Invia</button>
+      <button type="submit">Inviami il tuo Piccione</button>
     </div>
   </form>
   </section>
@@ -84,19 +97,21 @@ if (app) {
 
  <footer>
   <div class="newsletter">
-    <h3>Iscriviti alla newsletter!</h3>
+    <h3>Iscriviti alla Portaletter!</h3>
+    <p>Vuoi rimanere aggiornato sulle mie imprese?<br>I miei portali sono così potenti da raggiungerti ovunque!</p>
+    <h6>Istruzioni: Inserisci il nome del tuo piccione, così ti farò recapitare una runa magica di tracciamento.<br>Portala sempre con te... e il gioco è fatto!</h6>
     <div class="newsletter-input">
-      <input type="email" placeholder="Inserisci la tua email">
-      <button type="submit" class="button">Iscrivimi subito!</button>
+      <input type="email" placeholder="Inserisci il nome del tuo Piccione">
+      <button class="letter" type="submit" class="button">Iscrivimi subito!</button>
     </div>
     <label class="privacy-check">
-      <input type="checkbox"> Accetto termini e condizioni
+      <input type="checkbox"> Accetto termini e condizioni di piccioni e portali magici
     </label>
   </div>
 
   <div class="social">
-    <a href="#"><img src="instagram-icon.svg" alt="Instagram" /></a>
-    <a href="#"><img src="linkedin-icon.svg" alt="LinkedIn" /></a>
+   <a href="https://www.facebook.com/?locale=it_IT"><img src="/grimorio.png" alt="Facciagrimorio" /></a>
+   <a href="https://it.linkedin.com/"><img src="/calderone.png" alt="CalderIn" /></a>
   </div>
 
   <div class="crediti">© 2025 Giulia DM</div>
@@ -104,6 +119,7 @@ if (app) {
 
   `;
 
+// Effetto pulsante foto profilo
   document.querySelector('.fotoprofilo').classList.add('glow');
 
 }
@@ -118,6 +134,7 @@ window.addEventListener('scroll', () => {
   }
 });
 
+// Scroll smooth (in teoria)
 scrollToTopBtn.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
@@ -134,6 +151,7 @@ document.addEventListener('mousemove', e => {
     }
   });
   
+// Animazioni cursore con scia e glitter nella pagina
   function createStar(x, y) {
     const star = document.createElement('div');
     star.classList.add('star');
@@ -172,4 +190,3 @@ for (let i = 0; i < glitterCount; i++) {
   document.body.appendChild(glitter);
 }
 
-  
