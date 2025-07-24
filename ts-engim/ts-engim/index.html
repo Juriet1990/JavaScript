@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Todo App</title>
+</head>
+
+<body>
+  <div id="app" class="w-full h-full min-h-screen flex flex-col">
+    <header class="p-4 border-b-2 bg-primary flex justify-between items-center">
+      <h1 class="text-3xl font-bold text-primary-contrast">My Todo App</h1>
+      <button id="add-todo-btn" class="bg-primary-contrast text-primary px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all">
+        Nuova Task
+      </button>
+    </header>
+    <main class="flex gap-4 flex-1">
+      <aside class="w-1/4 border-r-2 border-primary">
+        <ul>
+          <li id="all"
+            class="py-2 px-4 cursor-pointer text-xl text-primary hover:bg-primary-hover hover:text-primary-contrast transition-all duration-300">
+            All</li>
+          <li id="done"
+            class="py-2 px-4 cursor-pointer text-xl text-primary hover:bg-primary-hover hover:text-primary-contrast transition-all duration-300">
+            Done</li>
+          <li id="in-progress"
+            class="py-2 px-4 cursor-pointer text-xl text-primary hover:bg-primary-hover hover:text-primary-contrast transition-all duration-300">
+            In Progress</li>
+          <li id="important"
+            class="py-2 px-4 cursor-pointer text-xl text-primary hover:bg-primary-hover hover:text-primary-contrast transition-all duration-300">
+            Important</li>
+          <li id="personal"
+            class="py-2 px-4 cursor-pointer text-xl text-primary hover:bg-primary-hover hover:text-primary-contrast transition-all duration-300">
+            Personal</li>
+          <li id="work"
+            class="py-2 px-4 cursor-pointer text-xl text-primary hover:bg-primary-hover hover:text-primary-contrast transition-all duration-300">
+            Work</li>
+          <li id="other"
+            class="py-2 px-4 cursor-pointer text-xl text-primary hover:bg-primary-hover hover:text-primary-contrast transition-all duration-300">
+            Other</li>
+        </ul>
+      </aside>
+      <section id="todo-list" class="w-3/4 flex flex-col gap-4">
+        <div id="todo-list-header" class="flex flex-col">
+          <h2 class="text-2xl font-bold text-primary"></h2>
+          <div id="todo-wrapper" class="flex flex-wrap gap-4"></div>
+        </div>
+      </section>
+    </main>
+    <footer class="p-4 border-t-2 bg-primary">
+      <h3 class="text-xl font-bold text-primary-contrast">My Todo App</h3>
+    </footer>
+    <div id="todo-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+      <div class="bg-white p-6 rounded-lg w-1/2">
+        <h2 class="text-2xl font-bold mb-4">Nuova Task</h2>
+        <form id="todo-form" class="space-y-4">
+          <div>
+            <label for="title" class="block text-sm font-medium text-gray-700">Titolo</label>
+            <input type="text" id="title" name="title" required minlength="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+            <p id="title-error" class="mt-1 text-sm text-red-600 hidden">Il titolo deve essere di almeno 3 caratteri</p>
+          </div>
+          <div>
+            <label for="description" class="block text-sm font-medium text-gray-700">Descrizione</label>
+            <textarea id="description" name="description" rows="3" required minlength="10" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"></textarea>
+            <p id="description-error" class="mt-1 text-sm text-red-600 hidden">La descrizione deve essere di almeno 10 caratteri</p>
+          </div>
+          <div>
+            <label for="category" class="block text-sm font-medium text-gray-700">Categoria</label>
+            <select id="category" name="category" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+              <option value="">Seleziona una categoria</option>
+              <option value="work">Work</option>
+              <option value="personal">Personal</option>
+              <option value="other">Other</option>
+            </select>
+            <p id="category-error" class="mt-1 text-sm text-red-600 hidden">Seleziona una categoria</p>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div class="flex items-center">
+              <input type="checkbox" id="important" name="important" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+              <label for="important" class="ml-2 block text-sm text-gray-700">Importante</label>
+            </div>
+            <div class="flex items-center">
+              <input type="checkbox" id="inProgress" name="inProgress" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+              <label for="inProgress" class="ml-2 block text-sm text-gray-700">In Progress</label>
+            </div>
+          </div>
+          <div class="flex justify-end space-x-2">
+            <button type="button" id="cancel-btn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">Annulla</button>
+            <button type="submit" class="px-4 py-2 bg-primary text-primary-contrast rounded-md hover:bg-opacity-90">Salva</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="edit-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+      <div class="bg-white p-6 rounded-lg w-1/2">
+        <h2 class="text-2xl font-bold mb-4">Modifica Task</h2>
+        <form id="edit-todo-form" class="space-y-4">
+          <div>
+            <label for="edit-title" class="block text-sm font-medium text-gray-700">Titolo</label>
+            <input type="text" id="edit-title" name="title" required minlength="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+            <p id="edit-title-error" class="mt-1 text-sm text-red-600 hidden">Il titolo deve essere di almeno 3 caratteri</p>
+          </div>
+          <div>
+            <label for="edit-description" class="block text-sm font-medium text-gray-700">Descrizione</label>
+            <textarea id="edit-description" name="description" rows="3" required minlength="10" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"></textarea>
+            <p id="edit-description-error" class="mt-1 text-sm text-red-600 hidden">La descrizione deve essere di almeno 10 caratteri</p>
+          </div>
+          <div>
+            <label for="edit-category" class="block text-sm font-medium text-gray-700">Categoria</label>
+            <select id="edit-category" name="category" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+              <option value="">Seleziona una categoria</option>
+              <option value="work">Work</option>
+              <option value="personal">Personal</option>
+              <option value="other">Other</option>
+            </select>
+            <p id="edit-category-error" class="mt-1 text-sm text-red-600 hidden">Seleziona una categoria</p>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div class="flex items-center">
+              <input type="checkbox" id="edit-important" name="important" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+              <label for="edit-important" class="ml-2 block text-sm text-gray-700">Importante</label>
+            </div>
+            <div class="flex items-center">
+              <input type="checkbox" id="edit-in-progress" name="inProgress" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+              <label for="edit-in-progress" class="ml-2 block text-sm text-gray-700">In Progress</label>
+            </div>
+            <div class="flex items-center">
+              <input type="checkbox" id="edit-done" name="done" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+              <label for="edit-done" class="ml-2 block text-sm text-gray-700">Completato</label>
+            </div>
+          </div>
+          <div class="flex justify-end space-x-2">
+            <button type="button" id="edit-cancel-btn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">Annulla</button>
+            <button type="submit" class="px-4 py-2 bg-primary text-primary-contrast rounded-md hover:bg-opacity-90">Salva Modifiche</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

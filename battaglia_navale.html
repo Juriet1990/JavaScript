@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html lang="it">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Battaglia Navale</title>
+
+    <script>
+
+        let setupPlayers = [0, 0];
+        const numNavi = 3;
+        console.log("start", document.getElementById("setupPlayer2"));
+        let players = [
+            {id: "player1", posizioniNavi:[], colpiNavi:[], naviColpite: 0},
+            {id: "player2", posizioniNavi:[], colpiNavi:[], naviColpite: 0}
+        ]
+
+        players[0].posizioniNavi = createArray(4, false);
+            players[1].posizioniNavi = createArray(4, false);
+            players[0].colpiNavi = createArray(4, '');
+            players[1].colpiNavi = createArray(4, '');
+
+        // Funzione per passare al setup player 2
+        function passaASetupGiocatore2() {
+            document.getElementById("setupPlayer1").style.display = "none";
+            document.getElementById("setupPlayer2").style.display = "block";
+        }
+
+        // Funzione per inizializzare l'array delle posizioni
+        function createArray(numero, initializeValue) {
+            let ret = [];
+            for (let i = 0; i < numero; i++) {
+                let riga = [];
+                for (let j = 0; j < numero; j++) {
+                    riga.push(initializeValue);
+                }
+                ret.push(riga);
+            }
+            return ret;
+        }
+            document.addEventListener("DOMContentLoaded", (event) => {
+            
+            document.getElementById("setupPlayer2").style.display = "none";
+            document.getElementById("buttonPlayer1").style.display = "none";
+        });
+
+        function setup(element) {
+            console.log(element)
+
+            if (setupPlayers[element.id[1] - 1] < numNavi || element.style.backgroundColor == 'gray') {
+                if (element.style.backgroundColor == 'gray') {
+                    element.style.backgroundColor = 'white';
+                    setupPlayers[element.id[1] - 1]--;
+                } else {
+                    element.style.backgroundColor = 'gray';
+                    setupPlayers[element.id[1] - 1]++;
+                    players[element.id[1] - 1]--;
+                }
+            } else {
+                alert("MOSSA NON AMMESSA!");
+            }
+
+            // Se il player 1 ha posizionato tutte le navi, mostra il bottone per passare a player 2
+            if (setupPlayers[0] == numNavi) {
+                document.getElementById("buttonPlayer1").style.display = "block";
+            } else {
+                document.getElementById("buttonPlayer1").style.display = "none";
+            }
+
+            console.log("setupPlayers", setupPlayers)
+            console.log("players", players)
+        }
+
+        // Nomi
+        var btn = document.getElementById("second_button");
+        var firsttext = [];
+
+        btn.addEventListener("click", function () {
+            var player1 = document.getElementById("firsttext");
+            var player2 = document.getElementById("secondtext");
+
+            if (player1.value != "" && player2.value != "") {
+                firsttext.push(player1.value);
+                firsttext.push(player2.value);
+                alert(firsttext);
+
+                // Aggiorna i nomi dei giocatori sopra le tabelle
+                document.getElementById("player1Name").innerText = player1.value;
+                document.getElementById("player2Name").innerText = player2.value;
+
+                // Mostra la fase di setup del primo giocatore
+                document.getElementById("setupPlayer1").style.display = "block";
+                document.getElementById("first_section").style.display = "none";
+                document.getElementById("second_section").style.display = "none";
+                document.getElementById("button").style.display = "none";
+
+                return firsttext;
+            } else {
+                alert("Inserire i nomi dei giocatori");
+            }
+        });
+
+    </script>
+
+    <style>
+        table, th, td {border: 1px solid black;}
+
+        td {width: 30px; height: 30px; text-align: center;}
+
+    </style>
+
+</head>
+
+<body>
+
+    <section id="first_section" class="first_section">
+        <input type="text" placeholder="Nome Player 1" id="firsttext"><br>    
+    </section>
+
+    <section id="second_section" class="second_section">
+        <input type="text" placeholder="Nome Player 2" id="secondtext"><br>
+    </section>
+
+    <br>
+
+    <section id="button">
+        <button type="button" id="second_button">Siamo pronti!</button>    
+    </section>
+
+    <div id="setup">
+        <p>POSIZIONA LE TUE NAVI!</p>
+    
+    <div id="setupPlayer1">
+        <p>SETUP PLAYER 1</p>
+
+        <p id="player1Name"></p> <!-- Nome Player 1 -->
+        <button id="buttonPlayer1" onclick="passaASetupGiocatore2()">PASSA A PLAYER 2</button>
+
+        <br>
+
+        <table>
+            <tr> <!-- Table Row -->
+                <th></th> <!-- Table Header -->
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+            </tr>
+            <tr>
+                <td>1</td> <!-- Table Data -->
+                <td id="p1a1" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                <td id="p1b1" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                <td id="p1c1" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                <td id="p1d1" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td id="p1a2" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                <td id="p1b2" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                <td id="p1c2" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                <td id="p1d2" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td id="p1a3" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                <td id="p1b3" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                <td id="p1c3" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                <td id="p1d3" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td id="p1a4" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                <td id="p1b4" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                <td id="p1c4" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                <td id="p1d4" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+        </table>
+        </div>
+        
+        <div id="setupPlayer2">
+            <p>SETUP PLAYER 2</p>
+            <p id="player2Name"></p> <!-- Nome Player 2 -->
+
+            <br>
+            
+            <table>
+                <tr>
+                    <th></th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>D</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td id="p2a1" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                    <td id="p2b1" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                    <td id="p2c1" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                    <td id="p2d1" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td id="p2a2" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                    <td id="p2b2" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                    <td id="p2c2" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                    <td id="p2d2" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td id="p2a3" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                    <td id="p2b3" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                    <td id="p2c3" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                    <td id="p2d3" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td id="p2a4" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                    <td id="p2b4" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                    <td id="p2c4" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                    <td id="p2d4" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td>
+                </tr>
+            </table>
+    </div>
+
+</body>
+
+</html>

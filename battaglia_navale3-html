@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<head>
+    <script>
+        //abbiamo deciso di memorizzare i dati in questa struttura:
+        //players:[{},{}] dove la cella di tipo json è fatta così:
+        //{
+        // id:string //è il codice giocatore
+        // posizioniNavi: [][]bool, ossia la griglia completa con true dove ho posizionato la nave, false altrimenti
+        // colpiNavi:[][]string, ossia la griglia completa del campo dell'avversario con tre valori possibili:
+        //              '' non ho ancora colpito
+        //              'acqua' colpo non andato a buon fine
+        //              'affondata' colpo andato a segno
+        //  navicolpite: int ossia il numero di navi che ho affondato
+        //}
+        //fasi:
+        //1 inizializzo i dati che mi servono, le griglie devono essere tutte prevalorizzate
+        //2 i giocatori a turno posizionano le navi
+        //3 i giocatori colpiscono fino a quando un giocatore ha affondato tutte le navi dell'avversario
+
+        //FASE 1: preparo le varibili che mi servono
+        
+        //let setupPlayers=[0,0]; // la spostiamo dentro il json dei players con il nome di naviposizionate
+        const numNavi=3;
+        console.log("start", document.getElementById("setupPlayer2"))
+        //potrebbe essere utile quando si colpisce avere nel currentPlayer il riferimento (indice) per accedere
+        //al campo dell'avversario
+        let players=[
+        {id:"player1", indice:0, indiceAvversario:1, posizioniNavi:[],colpiNavi:[],navicolpite:0, naviposizionate:0},
+        {id:"player2", indice:1, indiceAvversario:1,posizioniNavi:[],colpiNavi:[],navicolpite:0, naviposizionate:0}
+        ]
+        //INIZIALIZZA GIOCO
+        players[0].posizioniNavi=createArray(4, false);
+        players[1].posizioniNavi=createArray(4, false);
+        players[0].colpiNavi=createArray(4, '');
+        players[1].colpiNavi=createArray(4, '');        
+
+        // uso una variabile currentPlayer per memorizzare quale giocatore sta giocando
+        let currentPlayer=players[0] //passo la referenza al json !!!!!!
+        console.log("currentPlayer", currentPlayer)
+        
+        //SE FACCIO IL SETUP QUI NON FUNZIONA PERCHE' GLI OGGETTI HTML NON ESISTONO ANCORA
+        //                        //document.getElementById("setupPlayer2").style.display = "none";
+        //document.getElementById("buttonPlayer1").style.display = "none";
+        
+        //funzione utile per il setup
+        function createArray(numero, initializeValue){
+            let ret=[];
+            //aggiungo n righe
+            for(i=0;i<numero; i++){
+                //aggiungo una cella riga
+                    let riga=[]
+                    for(j=0;j<numero;j++){
+                        //aggiungo una cella colonna
+                        riga.push(initializeValue);
+                    }
+                ret.push(riga)
+            }
+            return ret;
+        }
+
+        document.addEventListener("DOMContentLoaded", (event) => {
+            //SETUP DOPO AVER CARICATO IL DOM
+
+            //le istruzioni precedenti inizializzano gli array, esattamente come se scrivessimo: 
+            //players[0].posizioniNavi=[[false, false, false, false],[false, false, false, false],[false, false, false, false],[false, false, false, false]]
+            
+            console.log("DOM fully loaded and parsed");
+            console.log("start", document.getElementById("setupPlayer2"))
+            //document.getElementById("setupPlayer2").style.display = "none";
+            document.getElementById("buttonPlayer1").style.display = "none";
+
+            //visualizzo quale giocatore sta giocando sull'html
+            document.getElementById("currentPlayerID").textContent = currentPlayer.id;
+
+        });
+
+        function passaASetupGiocatore2(){
+            //valorizzo il currentPlayer con player[1]
+            currentPlayer=players[1];
+            //cambio l'etichetta al currentPlayerID
+            //visualizzo quale giocatore sta giocando sull'html
+            document.getElementById("currentPlayerID").textContent = currentPlayer.id;
+            //nascondo il bottone passa a player2
+            document.getElementById("buttonPlayer1").style.display = "none";
+            //inizializzo la griglia a tutte celle bianche
+            document.querySelectorAll("td").forEach(x=>x.style.backgroundColor="white")
+        }
+
+
+        
+        
+        function setup(element){
+            console.log(element)
+            //element.id => es p120
+            //NB: quello che era setupPlayers[element.id[1]-1] adesso è currentPlayer.naviposizionate
+            //NB: accedo a player[i].naviposizionate con currentPlayer.naviposizionate -> passaggio per referenza
+            
+            if (currentPlayer.naviposizionate < numNavi || element.style.backgroundColor == 'red'){
+                if (element.style.backgroundColor == 'red'){
+                    //deseleziono la scelta
+                    element.style.backgroundColor = 'white'
+                    currentPlayer.naviposizionate--;
+                    //valorizzo l'array
+                    //ricorda: element.id => p120
+                    currentPlayer.posizioniNavi[element.id[0]][element.id[1]]=false;
+                }
+                else{
+                    //seleziono la scelta
+                    element.style.backgroundColor = 'red'
+                    currentPlayer.naviposizionate++;
+                    //ricorda: element.id => p120
+                    currentPlayer.posizioniNavi[element.id[0]][element.id[1]]=true;
+
+                }
+            }
+            else
+                alert("MOSSA NON AMMESSA");
+            //se il player corrente è il primo e ha posizionato tutte le navi
+            //devo far comparire il bottone per il player 2
+            if (currentPlayer.indice == 0 && currentPlayer.naviposizionate == numNavi)
+                document.getElementById("buttonPlayer1").style.display = "block";
+            else
+                document.getElementById("buttonPlayer1").style.display = "none";
+          
+            //console.log("setupPlayers", setupPlayers)
+            console.log("players", players)
+            
+        }
+    </script>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+
+        td {width: 60px; height: 50px; text-align: center;}
+        </style>
+
+</head>
+<body>
+    <div id="setup">
+        <p>FASE DI SETUP (o FASE 2)</p>
+        <div id="setupPlayer1">
+            <p>SETUP PLAYER <span id="currentPlayerID"></span></p>
+            <button id="buttonPlayer1" onclick="passaASetupGiocatore2()">PASSA A PLAYER 2</button>
+            <table>
+                <th></th><th>A</th><th>B</th><th>C</th><th>D</th>
+                <tr><td>1</td><td id="00" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td><td id="01" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td><td id="02" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td><td id="03" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td></tr>
+                <tr><td>2</td><td id="10" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td><td id="11" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td><td id="12" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td><td id="13" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td></tr>
+                <tr><td>3</td><td id="20" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td><td id="21" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td><td id="22" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td><td id="23" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td></tr>
+                <tr><td>4</td><td id="30" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td><td id="31" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td><td id="32" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td><td id="33" onclick="setup(this)">&nbsp;&nbsp;&nbsp;</td></tr>
+            </table>
+        </div>
+       
+    </div>
+</body>
+</html>

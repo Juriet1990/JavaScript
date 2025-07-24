@@ -1,0 +1,77 @@
+<!-- 
+ Esercizio 8
+8. Domanda su javascript e dom
+
+Scrivere una pagina html e del codice javascript che contenga una tabella html.
+Ogni cella della tabella deve essere cliccabile e al click il background si colora di verde.
+Quando tutte le celle della tabella sono state cliccate (e quindi sono tutte verdi) compare una scritta
+che dice: "Complimenti, tutte le celle sono state cliccate".
+--> 
+
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verifica DiMattei</title>
+
+    <style>
+
+        h2, h4 {text-align: center; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;}
+
+        body {text-align: center;}
+
+        table, th, td {
+          border: 1px solid black; margin: 0 auto;
+        }
+
+        td {width: 60px; height: 50px; text-align: center; cursor: pointer;}
+
+    </style>
+
+</head>
+
+<body>
+
+    <h2>Esercizio 8</h2>
+
+    <div id="tabella">
+        <h4>Minigame</h4>
+        <p>Se clicchi tutte celle, avrai una sorpresa!</p>
+            <table>
+                <tr><td></td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr>
+                <tr><td></td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr>
+                <tr><td></td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr>
+                <tr><td></td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr>
+            </table>
+    </div>
+
+    <p id="complimenti" style="display: none;">Complimenti hai vinto!<br>Tutte le celle sono state cliccate!</p>
+  
+    <script>
+        // Seleziono le celle
+        const cells = document.querySelectorAll('table td');
+        let clickedCells = 0;
+
+        // Inizio il ciclo forEach per incrementare le caselle cliccate a ogni giro
+        cells.forEach(cell => {
+            cell.addEventListener('click', function() {
+                // Cambio colore onclick e incremento
+                if (cell.style.backgroundColor !== 'lightgreen') { // Per cliccare sulla cella una volta sola
+                    cell.style.backgroundColor = 'lightgreen';
+                    clickedCells++;
+
+                    // Se tutte le celle sono state cliccate, mostra il messaggio
+                    if (clickedCells === cells.length) {
+                        document.getElementById('complimenti').style.display = 'block';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calcolatrice JavaScript</title>
+
+    <style>
+
+        /* .calculator_keys {display: grid;} */
+
+        html, body {display: flex; flex-direction: column; height: 100vh; justify-content: center; align-items: center;}
+
+        #calcolatrice {display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; width: 50vh; padding: 5px; justify-items: center; background-color: lightgrey; border-radius: 5%;}
+
+        .pulsante {display: flex; width: 10vh; height: 10vh; border-radius: 50%; background-color: rgb(203, 236, 236); justify-content: center; align-items: center; font-weight: bold; font-size: 3rem;}
+        .pulsante:hover {background-color: rgb(184, 238, 238); cursor: pointer;}
+        .pulsante:active {background-color: rgb(163, 221, 221);}
+
+        .operatore {background-color: rgb(183, 132, 230); cursor: pointer;}
+        .operatore:hover {background-color: rgb(169, 112, 223); cursor: pointer;}
+        .operatore:active {background-color: rgb(110, 47, 170);}
+
+        #schermo {width: 50vh; border: none; font-size: 3rem; padding: 5px; border-style: groove; border-color: rgb(183, 132, 230); border-radius: 5%;}
+
+    </style>
+
+</head>
+
+<body>
+
+    <input type="text" id="schermo" disabled/>
+    <div id="calcolatrice">
+        <div class="pulsante" onclick="aggiungi('1')">1</div>
+        <div class="pulsante" onclick="aggiungi('2')">2</div>
+        <div class="pulsante" onclick="aggiungi('3')">3</div>
+        <div class="pulsante operatore" onclick="aggiungi('+')">+</div>
+        <div class="pulsante" onclick="aggiungi('4')">4</div>
+        <div class="pulsante" onclick="aggiungi('5')">5</div>
+        <div class="pulsante" onclick="aggiungi('6')">6</div>
+        <div class="pulsante operatore" onclick="calcola()">=</div> 
+        <div class="pulsante" onclick="aggiungi('7')">7</div>
+        <div class="pulsante" onclick="aggiungi('8')">8</div>
+        <div class="pulsante" onclick="aggiungi('9')">9</div>
+        <div class="pulsante operatore" onclick="cancella()">C</div>
+        <div class="pulsante" onclick="aggiungi('0')">0</div>
+    </div>
+
+    <!-- 
+    <form>
+        <input type="text" name="textA" placeholder="Testo_A">
+        <input type="text" name="textB" placeholder="Testo_B">
+        <label for="risultato">Risultato</label>
+    </form>   
+    
+    <br>
+
+    <button class="somma">Somma</button>
+    -->
+
+    <!-- 
+    <input type="number" id="numero1">
+    <input type="number" id="numero2">
+    <button onclick="calcolasomma()">Somma</button>
+    <p id="risultato"></p> 
+    -->
+
+    <!-- 
+    <div class="calculator">
+        <div class="calculator_display">0</div>
+        <div class="calculator_keys">
+            <button class="key--operator" data-action="add">+</button>
+            <button class="key--operator" data-action="substract">-</button>
+            <button class="key--operator" data-action="mupltiply">&times;</button>
+            <button class="key--operator" data-action="divide">÷</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>0</button>
+            <button data-action="decimal">,</button>
+            <button data-action="clear">AC</button>
+            <button class="key--equal" data-action="calculate">=</button>
+        </div>
+    </div> 
+    -->
+
+</body>
+
+<script async defer>
+
+    let schermo = document.getElementById("schermo");
+
+    function aggiungi(s){
+        schermo.value += s;
+    }
+
+    function cancella(){
+        schermo.value = "";
+    }
+
+    function calcola(){
+        schermo.value = eval(schermo.value);
+        
+    }
+
+    /* 
+    function calcolasomma(){
+        let num1=parseFloat(document.getElementById("numero1").value)
+        let num2=parseFloat(document.getElementById("numero2").value)
+        if (isNaN(num1) || isNaN(num2)){
+            document.getElementById("risultato").textContent="inserisci numeri validi";
+            return;
+        }
+        let somma=num1+num2;
+        document.getElementById("risultato").textContent="la somma è:" + somma;
+    } 
+    */
+
+   /* 
+   const calculator = document.querySelector(".calculator")
+   const keys = calcolatrice.querySelector(".caltulator_keys")
+   keys.addEventListener("click", e => { 
+    if (e.target.matches("button")){}})
+   const key = e.target
+   const action = key.dataset.action
+   if (!action) {
+    console.log("number_key!")
+   }
+   if (
+    action === "add"||
+    action === "substract" ||
+    action === "multiply" ||
+    action === "divide"
+   ) {
+    console.log("operator key!")
+   }
+   if (action === 'decimal') {
+  console.log('decimal key!')
+  }
+
+  if (action === 'clear') {
+  console.log('clear key!')
+  }
+
+  if (action === 'calculate') {
+  console.log('equal key!')
+  }
+  */
+
+</script>
+
+</html>

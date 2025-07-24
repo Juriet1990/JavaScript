@@ -1,0 +1,79 @@
+<!-- 
+ Esercizio 7
+7. Domanda su javascript e dom
+
+Dato il seguente codice html
+<html>
+<body>
+<div id="miodiv">
+<p id="miop">ecco il mio p</p>
+<p>Ecco il contenuto del mio div</p>
+</div>
+</body>
+</html>
+Scrivere del codice javascript che associ un evento di click al p con id=miop 
+che cambi il background color (es rosso) al div con id="miodiv" 
+-->
+
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verifica DiMattei</title>
+
+    <style>
+
+        h2 {text-align: center; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;}
+
+        body {text-align: center;}
+
+        button {border-radius: 8%; text-align: center;}
+
+        p {font-family: 'Gill Sans', 'Gill Sans MT','Trebuchet MS', sans-serif;}
+
+    </style>
+
+</head>
+
+<body>
+
+    <h2>Esercizio 7</h2>
+
+    <div id="miodiv">
+        <p>Ecco il contenuto del mio div</p>
+        <button id="mioparagrafo">Clicca qui per cambiare colore al paragrafo!</button>
+        <hr>
+    </div>
+
+    <button id="bottone">Clicca qui per cambiare colore al bottone!</button>
+
+    <hr>
+
+    <button id="body">Clicca qui per cambiare colore alla pagina web!</button>
+
+    <script>
+
+        // Paragrafo rosso onclick
+        document.getElementById('mioparagrafo').addEventListener('click', function() {
+            document.getElementById('miodiv').style.backgroundColor = 'red';
+        });
+
+        // Bottone verde onclick
+        document.getElementById('bottone').addEventListener('click', function() {
+            document.getElementById('bottone').style.backgroundColor = 'lightgreen';
+        })
+
+        // Pagina azzurra onclick
+        document.getElementById('body').addEventListener('click', function() {
+            document.body.style.backgroundColor = 'lightblue';
+        })
+
+    </script>
+
+</body>
+
+</html>

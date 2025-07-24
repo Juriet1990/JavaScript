@@ -1,0 +1,66 @@
+<html>
+
+<head>
+
+    <script>
+
+        function testApi() {
+            var xhr = new XMLHttpRequest();
+            var requestUrl = "https://restcountries.com/v3.1/name/deutschland";
+            xhr.open("GET", requestUrl, true);
+            xhr.onload = function () {
+
+                // Converte in JSON
+                const responseData = JSON.parse(xhr.responseText);
+                console.log(responseData);
+
+                // Array dei bordi (confini)
+                const borders = responseData[0].borders;
+                console.log("Confini:", borders);
+
+                // Nuova opzione per ogni bordo
+                const selectElement = document.getElementById("miaSelect");
+
+                // Aggiungi una nuova opzione per ogni bordo con un ciclo foreach
+                borders.forEach(function (border) {
+                    let newOption = document.createElement("option");
+                    newOption.text = border;
+                    newOption.value = border;
+                    selectElement.add(newOption);
+                });
+
+                document.getElementById("result").textContent = JSON.stringify(responseData, null, 2);
+            };
+            xhr.send();
+        }
+
+       /* Aggiunge una nuova opzione al tag select onclick
+        function aggiungiOpzione() {
+            const selectElement = document.getElementById("miaSelect");
+            const newOption = document.createElement("option");
+            newOption.text = "Nuova Opzione";
+            newOption.value = "nuovo_valore";
+            selectElement.add(newOption);
+        } */
+
+    </script>
+
+</head>
+
+<body>
+
+    <p onclick="testApi()">TEST API</p>
+    <div id="result"></div>
+
+    <select id="miaSelect">
+        <option value="opzione1">
+            Aspetto il caricamento dell'api
+        </option>
+    </select>
+
+    <!-- Nuova opzione onclick 
+    <button onclick="aggiungiOpzione()">Aggiungi opzione</button> -->
+
+</body>
+
+</html>
