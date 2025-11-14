@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Sara La Maga</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-sinistra">
+                <img src="logo.png" alt="" class="logo-img" draggable="false" />
+                <a href="#" class="logo-text">Sara La Maga</a>
+            </div>
+
+            <div class="nav-centro">
+                <a href="#scrollspyHeading1">Home</a>
+                <a href="#scrollspyHeading2">Chi sono</a>
+                <a href="#scrollspyHeading3">Servizi</a>
+                <a href="#scrollspyHeading4">Contatti</a>
+            </div>
+
+            <div class="nav-social">
+                <a href="https://www.facebook.com/?locale=it_IT"><img src="grimorio.png" alt="Facciagrimorio" draggable="false"/></a>
+                <a href="https://it.linkedin.com/"><img src="calderone.png" alt="CalderIn" draggable="false" /></a>
+            </div>
+        </nav>
+    </header>
+
+    <body>
+        <div class="cerchio">
+            <img class="fotoprofilo" src="saramage.png" alt="Sara Pietrarosa" draggable="false">
+        </div>
+
+        <section class="home">
+            <h2 id="scrollspyHeading1">Home</h2>
+            <p>Benvenuti nella pagina di Sara La Maga.<br>
+                In questa pagina troverete la mia storia e il mio percorso formativo,<br> i servizi che offro e come
+                contattarmi via piccione viaggiatore.</p>
+        </section>
+
+        <section class="aboutme">
+            <h2 id="scrollspyHeading2">Chi sono</h2>
+            <p>Sono Sara Rosapietra, Maga del Regno di Engimiath, originaria del villaggio di Orbas. Ho studiato magia
+                elementale presso l'Accademia di Magia Reale Engimorium, ottenendo il massimo dei voti.
+                Le mia specialità sono le magie elementali, i portali e le pozioni. Ho scritto un libro di magia
+                intitolato: "Engimorio", dove spiego a giovani maghi come approcciarsi alla via della magia.
+                Lavoro principalmente come maga mercenaria offrendo i miei servizi e le mie abilità agli avventurieri
+                che hanno bisogno di un mago durante le loro spedizioni nei dungeon.
+                Ma insegno anche all'Accademia di Engimorium, quando sono in città, tra una spedizione e l'altra.
+                Inoltre sono in grado di prevedere il futuro di chiunque osservando i fondi di caffè.
+                <br>Sono una maga dall'enorme talento, con una particolare affinità per le magie di fuoco. Posso
+                portarvi da un capo all'altro del mondo con i miei portali, e far innamorare chiunque di voi con i miei
+                famosissimi filtri d'amore.
+                <br>Con me il successo è garantito.
+            </p>
+        </section>
+
+        <section class="servizi">
+            <h2 id="scrollspyHeading3">Servizi</h2>
+            <p>I servizi che offro spaziano da maga mercenaria a insegnante di magia.<br>Portali per ogni luogo
+                conosciuto.<br>Creazione di pozioni, filtri ed elisir. Letture del futuro tramite fondi di caffè.
+                <br>Ogni servizio ha un costo che può variare da: sacchi d'oro, gemme preziose, ingredienti rari o
+                tesori.
+            </p>
+            <ul class="listaservizi">
+                <li>Guida per Dungeon</li>
+                <li>Insegnante di Magia Elementale</li>
+                <li>Portali</li>
+                <li>Pozioni, filtri ed elisir</li>
+                <li>Divinazione</li>
+        </section>
+
+        <section class="contatti">
+            <h2 id="scrollspyHeading4">Contatti</h2>
+            <form>
+                <div class="form-sinistra">
+                    <input type="text" placeholder="Nome e Cognome o Titolo (Luna la Druida)">
+                    <input type="email" placeholder="Nome Piccione (teodorindo@piccione.nomeregno)">
+                </div>
+                <div class="form-destra">
+                    <textarea placeholder="Messaggio"></textarea>
+                    <button type="submit">Inviami il tuo Piccione</button>
+                </div>
+            </form>
+        </section>
+        <button id="scrollToTop" title="Torna su">⬆</button>
+    </body>
+
+    <footer>
+        <div class="newsletter">
+            <h3>Iscriviti alla Portaletter!</h3>
+            <p>Vuoi rimanere aggiornato sulle mie imprese?<br>I miei portali sono così potenti da raggiungerti ovunque!
+            </p>
+            <h6>Istruzioni: Inserisci il nome del tuo piccione, così ti farò recapitare una runa magica di
+                tracciamento.<br>Portala sempre con te... e il gioco è fatto!</h6>
+            <div class="newsletter-input">
+                <input type="email" placeholder="Inserisci il nome del tuo Piccione">
+                <button class="letter" type="submit" class="button">Iscrivimi subito!</button>
+            </div>
+            <label class="privacy-check">
+                <input type="checkbox"> Accetto termini e condizioni di piccioni e portali magici
+            </label>
+        </div>
+
+        <div class="social">
+            <a href="https://www.facebook.com/?locale=it_IT"><img src="grimorio.png" alt="Facciagrimorio" draggable="false"/></a>
+            <a href="https://it.linkedin.com/"><img src="calderone.png" alt="CalderIn"  draggable="false"/></a>
+        </div>
+
+        <div class="crediti">© 2025 Giulia DM</div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => {
+            if (window.location.hash === '#') {
+                history.replaceState(null, null, ' ');
+                window.scrollTo(0, 0);
+            }
+        });
+
+        // Effetto pulsante foto profilo
+        document.querySelector('.fotoprofilo').classList.add('glow');
+
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        // Scroll smooth (in teoria)
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        document.addEventListener('mousemove', e => {
+            createStar(e.clientX, e.clientY);
+        });
+
+        document.addEventListener('click', e => {
+            for (let i = 0; i < 10; i++) {
+                const offsetX = (Math.random() - 0.5) * 50;
+                const offsetY = (Math.random() - 0.5) * 50;
+                createStar(e.clientX + offsetX, e.clientY + offsetY);
+            }
+        });
+
+        // Animazioni cursore con scia e glitter nella pagina
+        function createStar(x, y) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = x + 'px';
+            star.style.top = y + 'px';
+            document.body.appendChild(star);
+
+            setTimeout(() => {
+                star.remove();
+            }, 1000);
+        }
+
+        document.addEventListener('mousemove', e => {
+            createGlitter(e.clientX, e.clientY);
+        });
+
+        document.addEventListener('click', e => {
+            for (let i = 0; i < 15; i++) {
+                const offsetX = (Math.random() - 0.5) * 60;
+                const offsetY = (Math.random() - 0.5) * 60;
+                createGlitter(e.clientX + offsetX, e.clientY + offsetY);
+            }
+        });
+
+        const glitterCount = 100;
+
+        for (let i = 0; i < glitterCount; i++) {
+            const glitter = document.createElement('div');
+            glitter.classList.add('glitter');
+
+            glitter.style.left = Math.random() * window.innerWidth + 'px';
+            glitter.style.top = Math.random() * window.innerHeight + 'px';
+
+            glitter.style.animationDuration = (1 + Math.random() * 2) + 's';
+
+            document.body.appendChild(glitter);
+        }
+    </script>
+
+</body>
+
+</html>
